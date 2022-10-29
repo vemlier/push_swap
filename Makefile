@@ -6,40 +6,26 @@
 #    By: chukim <chukim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 12:46:09 by chukim            #+#    #+#              #
-#    Updated: 2022/05/26 12:28:42 by chukim           ###   ########.fr        #
+#    Updated: 2022/10/29 18:03:15 by chukim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME            = push_swap.a
+NAME			= push_swap.a
 FT_PRINTFDIR	= ./ft_printf
 FT_PRINTFFILE	= libftprintf.a
-
-CC              = gcc
-CFLAGS  = -Wall -Wextra -Werror
-AR              = ar rcs
-RM              = rm -f
-
-SRCS    = push_swap.c \
-			preprocessor.c \
-			stack_making.c \
-			stack_printing.c \
-			stack_basic.c \
-			stack_push_swap1.c \
-			stack_push_swap2.c \
-			stack_arr.c \
-			error.c \
-			sorting_a.c \
-			sorting_b.c \
-			quick_sorting.c \
-			main_sorting1.c \
-			main_sorting2.c \
-			sorting_5.c \
-			opt_op.c \
-
+CC				= cc
+CFLAGS			= -Wall -Wextra -Werror
+RM				= rm -f
+AR				= ar rcs
+INCLUDES		= ./includes/push_swap.h
+SRCS    = ./srcs/push_swap.c ./srcs/preprocessor.c ./srcs/stack_making.c ./srcs/stack_printing.c \
+			./srcs/stack_basic.c ./srcs/stack_push_swap1.c ./srcs/stack_push_swap2.c ./srcs/stack_arr.c \
+			./srcs/error.c ./srcs/sorting_a.c ./srcs/sorting_b.c ./srcs/quick_sorting.c \
+			./srcs/main_sorting1.c ./srcs/main_sorting2.c ./srcs/sorting_5.c ./srcs/opt_op.c
 OBJS    = $(SRCS:.c=.o)
 
-.c.o:
-	$(CC) $(CFLAGS) -c $< -I.
+%.o : %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJS)
 		make -C $(FT_PRINTFDIR)
@@ -49,13 +35,14 @@ $(NAME) : $(OBJS)
 all : $(NAME)
 
 clean :
-		make -C $(FT_PRINTFDIR) clean
-		$(RM) $(OBJS)
+	$(RM) $(OBJS)
+	make -C $(FT_PRINTFDIR) clean
+		
 
 fclean : clean
-		make -C $(FT_PRINTFDIR) fclean
-		$(RM) $(NAME)
+	$(RM) $(NAME)
+	make fclean -C $(FT_PRINTFDIR)
 
 re : clean all
 
-.PHONY : all clean fclean re bonus
+.PHONY : all clean fclean re

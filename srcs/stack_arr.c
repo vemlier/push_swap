@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_arr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 10:23:09 by chukim            #+#    #+#             */
-/*   Updated: 2022/10/29 17:49:06 by chukim           ###   ########.fr       */
+/*   Updated: 2022/12/22 07:11:40 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	*stack_to_arr(t_stack *stack, int len)
 
 	result = malloc(sizeof(int) * len);
 	if (result == NULL)
-		print_error();
+		print_error("malloc error\n");
 	current = stack->top;
 	cnt = 0;
 	while (len-- > 0)

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   sorting_a.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:28:26 by chukim            #+#    #+#             */
-/*   Updated: 2022/10/29 17:49:09 by chukim           ###   ########.fr       */
+/*   Updated: 2022/12/23 04:14:43 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	select_pivot(t_stack *stack, int *pivot1, int *pivot2, int len)
+void	select_pivot(t_stack *stack, t_pivot_set *pivot, int len)
 {
 	int	*arr;
 
@@ -23,87 +23,86 @@ void	select_pivot(t_stack *stack, int *pivot1, int *pivot2, int len)
 	}
 	arr = stack_to_arr(stack, len);
 	quick_sort(arr, 0, len - 1);
-	*pivot1 = arr[(len / 3) * 2];
-	*pivot2 = arr[len / 3];
+	pivot->pivot1 = arr[(len / 3) * 2];
+	pivot->pivot2 = arr[len / 3];
+	free(arr);
 }
 
-void	mini_sort_2(t_stack *stack, t_stack *operation_set, char name)
+void	mini_sort_2(t_args *args, char name)
 {
 	t_node	*current;
 
-	current = stack->top;
-	if (current->left != NULL)
+	if (name == 'a')
 	{
-		if (name == 'a')
-		{
-			if (current->val > current->left->val)
-				sa(stack, operation_set);
-		}
-		else if (name == 'b')
-		{
-			if (current->val < current->left->val)
-				sb(stack, operation_set);
-		}
-		else
-			print_error();
+		current = args->stack_a->top;
+		if (current->left != NULL && current->val > current->left->val)
+			sa(args);
 	}
+	else if (name == 'b')
+	{
+		current = args->stack_b->top;
+		if (current->left != NULL && current->val < current->left->val)
+			sb(args);
+	}
+	else
+		print_error("sort error\n");
 }
 
-void	sort_3_a_1(t_stack *stack_a, t_stack *stack_b, t_stack *operation_set)
+void	sort_3_a_1(t_args *args)
 {
 	t_node	*current;
 
-	if (stack_a->len < 3)
+	if (args->stack_a->len < 3)
 	{
-		mini_sort_2(stack_a, operation_set, 'a');
+		mini_sort_2(args, 'a');
 		return ;
 	}
-	current = stack_a->top;
+	current = args->stack_a->top;
 	if (current->val > current->left->val
 		&& current->val < current->left->left->val)
 	{
-		sa(stack_a, operation_set);
+		sa(args);
 	}
 	else if (current->left->val > current->left->left->val
 		&& current->left->val < current->val)
 	{
-		sa(stack_a, operation_set);
-		pb(stack_a, stack_b, operation_set);
-		sa(stack_a, operation_set);
-		pa(stack_a, stack_b, operation_set);
-		sa(stack_a, operation_set);
+		sa(args);
+		pb(args);
+		sa(args);
+		pa(args);
+		sa(args);
 	}
 	else
-		sort_3_a_2(stack_a, stack_b, operation_set);
+		sort_3_a_2(args);
 }
 
-void	sort_3_a_2(t_stack *stack_a, t_stack *stack_b, t_stack *operation_set)
+void	sort_3_a_2(t_args *args)
 {
 	t_node	*current;
 
-	current = stack_a->top;
+	current = args->stack_a->top;
 	if (current->left->left->val > current->left->val
 		&& current->left->left->val < current->val)
 	{
-		sa(stack_a, operation_set);
-		pb_sa_pa(stack_a, stack_b, operation_set);
+		sa(args);
+		pb_sa_pa(args);
 	}
 	else if (current->left->left->val < current->left->val
 		&& current->left->left->val > current->val)
 	{
-		pb_sa_pa(stack_a, stack_b, operation_set);
+		pb_sa_pa(args);
 	}
 	else if (current->val < current->left->val
 		&& current->val > current->left->left->val)
 	{
-		pb_sa_pa(stack_a, stack_b, operation_set);
-		sa(stack_a, operation_set);
+		pb_sa_pa(args);
+		sa(args);
 	}
 }
 
-void	pb_sa_pa(t_stack *stack_a, t_stack *stack_b, t_stack *operation_set)
+void	pb_sa_pa(t_args *args)
 {
-	pb(stack_a, stack_b, operation_set);
-	sa(stack_a, operation_set);
-	pa(stack_a, stack_b, operation_set);
+	pb(args);
+	sa(args);
+	pa(args);
 }

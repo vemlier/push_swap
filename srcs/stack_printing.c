@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_printing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 10:09:44 by chukim            #+#    #+#             */
-/*   Updated: 2022/10/29 17:49:00 by chukim           ###   ########.fr       */
+/*   Updated: 2022/12/23 04:36:40 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ void	print_stack_duel(t_stack *stack_a, t_stack *stack_b)
 	else
 		cnt = stack_b->len;
 	ft_printf("-----stack_a-----||-----stack_b-----\n");
-	print_stack_duel_2(stack_a, stack_b, cnt);
+	print_stack_duel_contents(stack_a, stack_b, cnt);
 	ft_printf("-----stack_a-----||-----stack_b-----\n");
 	ft_printf("stack_a len [%d] || stack_b len [%d]\n",
 		stack_a->len, stack_b->len);
 }
 
-void	print_stack_duel_2(t_stack *stack_a, t_stack *stack_b, int cnt)
+void	print_stack_duel_contents(t_stack *stack_a, t_stack *stack_b, int cnt)
 {
 	t_node	*current1;
 	t_node	*current2;
@@ -90,12 +90,12 @@ int	stack_len(t_stack *stack)
 	return (cnt);
 }
 
-void	rrr(t_stack *stack_a, t_stack *stack_b, t_stack *operation_set)
+void	rrr(t_args *args)
 {
 	t_node	*operation;
 
-	operation = get_new_node(10);
-	rotate(stack_a, -1);
-	rotate(stack_b, -1);
-	push_top(operation_set, operation);
+	operation = get_new_node(Rrr);
+	rotate(args->stack_a, -1);
+	rotate(args->stack_b, -1);
+	push_top(args->op, operation);
 }

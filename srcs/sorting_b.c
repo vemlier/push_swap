@@ -3,68 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   sorting_b.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 10:55:46 by chukim            #+#    #+#             */
-/*   Updated: 2022/10/29 17:49:11 by chukim           ###   ########.fr       */
+/*   Updated: 2022/12/23 02:30:23 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	sort_3_b_1(t_stack *stack_a, t_stack *stack_b, t_stack *operation_set)
+void	sort_3_b_1(t_args *args)
 {
 	t_node	*current;
 
-	if (stack_b->len < 3)
+	if (args->stack_b->len < 3)
 	{
-		mini_sort_2(stack_b, operation_set, 'b');
+		mini_sort_2(args, 'b');
 		return ;
 	}
-	current = stack_b->top;
+	current = args->stack_b->top;
 	if (current->val > current->left->val
 		&& current->val < current->left->left->val)
 	{
-		pa_sb_pb(stack_a, stack_b, operation_set);
-		sb(stack_b, operation_set);
+		pa_sb_pb(args);
+		sb(args);
 	}
 	else if (current->left->val < current->left->left->val
 		&& current->left->val > current->val)
 	{
-		sb(stack_b, operation_set);
-		pa_sb_pb(stack_a, stack_b, operation_set);
-		sb(stack_b, operation_set);
+		sb(args);
+		pa_sb_pb(args);
+		sb(args);
 	}
 	else
-		sort_3_b_2(stack_a, stack_b, operation_set);
+		sort_3_b_2(args);
 }
 
-void	sort_3_b_2(t_stack *stack_a, t_stack *stack_b, t_stack *operation_set)
+void	sort_3_b_2(t_args *args)
 {
 	t_node	*current;
 
-	current = stack_b->top;
+	current = args->stack_b->top;
 	if (current->left->left->val > current->left->val
 		&& current->left->left->val < current->val)
 	{
-		pa_sb_pb(stack_a, stack_b, operation_set);
+		pa_sb_pb(args);
 	}
 	else if (current->left->left->val < current->left->val
 		&& current->left->left->val > current->val)
 	{
-		sb(stack_b, operation_set);
-		pa_sb_pb(stack_a, stack_b, operation_set);
+		sb(args);
+		pa_sb_pb(args);
 	}
 	else if (current->val < current->left->val
 		&& current->val > current->left->left->val)
 	{
-		sb(stack_b, operation_set);
+		sb(args);
 	}
 }
 
-void	pa_sb_pb(t_stack *stack_a, t_stack *stack_b, t_stack *operation_set)
+void	pa_sb_pb(t_args *args)
 {
-	pa(stack_a, stack_b, operation_set);
-	sb(stack_b, operation_set);
-	pb(stack_a, stack_b, operation_set);
+	pa(args);
+	sb(args);
+	pb(args);
 }

@@ -3,60 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   main_sorting2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 12:48:57 by chukim            #+#    #+#             */
-/*   Updated: 2022/10/29 17:49:24 by chukim           ###   ########.fr       */
+/*   Updated: 2022/12/23 04:16:23 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	b_to_a(t_stack *stack_a, t_stack *stack_b, t_stack *op, int len)
+void	b_to_a(t_args *args, int len)
 {
 	t_cnt_b		*cnt;
-	t_stack_set	*set;
+	t_pivot_set	*pivot;
 
-	if (b_to_a_4(stack_a, stack_b, op, len) == 1)
+	if (b_to_a_4(args, len) == 1)
 		return ;
 	cnt = (t_cnt_b *)malloc(sizeof(t_cnt_b));
 	cnt_b_init(cnt);
-	set = (t_stack_set *)malloc(sizeof(t_stack_set));
-	t_stack_init_b(stack_a, stack_b, set, len);
-	b_to_a_2(set, op, cnt);
-	a_to_b(stack_a, stack_b, op, cnt->cnt_pa - cnt->cnt_ra);
-	b_to_a_3(stack_a, stack_b, op, cnt);
-	a_to_b(stack_a, stack_b, op, cnt->cnt_ra);
-	b_to_a(stack_a, stack_b, op, cnt->cnt_rb);
+	pivot = (t_pivot_set *)malloc(sizeof(t_pivot_set));
+	select_pivot(args->stack_b, pivot, len);
+	args->len = len;
+	args->pivot_set = pivot;
+	b_to_a_2(args, cnt);
+	a_to_b(args, cnt->cnt_pa - cnt->cnt_ra);
+	b_to_a_3(args, cnt);
+	a_to_b(args, cnt->cnt_ra);
+	b_to_a(args, cnt->cnt_rb);
+	free(cnt);
+	free(pivot);
 }
 
-void	b_to_a_2(t_stack_set *set, t_stack *op, t_cnt_b *cnt)
+void	b_to_a_2(t_args *args, t_cnt_b *cnt)
 {
 	t_node	*current;
 
-	current = set->stack_b->top;
-	while (set->len-- > 0)
+	current = args->stack_b->top;
+	while (args->len-- > 0)
 	{
-		if (current->val < set->pivot2)
+		if (current->val < args->pivot_set->pivot2)
 		{
-			rb(set->stack_b, op);
+			rb(args);
 			cnt->cnt_rb++;
 		}
 		else
 		{
-			pa(set->stack_a, set->stack_b, op);
+			pa(args);
 			cnt->cnt_pa++;
-			if (current->val < set->pivot1)
+			if (current->val < args->pivot_set->pivot1)
 			{
-				ra(set->stack_a, op);
+				ra(args);
 				cnt->cnt_ra++;
 			}
 		}
-		current = set->stack_b->top;
+		current = args->stack_b->top;
 	}
 }
 
-void	b_to_a_3(t_stack *stack_a, t_stack *stack_b, t_stack *op, t_cnt_b *cnt)
+void	b_to_a_3(t_args *args, t_cnt_b *cnt)
 {
 	int	len;
 
@@ -65,53 +69,44 @@ void	b_to_a_3(t_stack *stack_a, t_stack *stack_b, t_stack *op, t_cnt_b *cnt)
 		len = return_min(cnt->cnt_ra, cnt->cnt_rb);
 		cnt->cnt_i = cnt->cnt_ra - len;
 		while (len-- > 0)
-			rrr(stack_a, stack_b, op);
+			rrr(args);
 		while (cnt->cnt_i-- > 0)
-			rra(stack_a, op);
+			rra(args);
 	}
 	else
 	{
 		len = return_min(cnt->cnt_ra, cnt->cnt_rb);
 		cnt->cnt_i = cnt->cnt_rb - len;
 		while (len-- > 0)
-			rrr(stack_a, stack_b, op);
+			rrr(args);
 		while (cnt->cnt_i-- > 0)
-			rrb(stack_b, op);
+			rrb(args);
 	}
 }
 
-int	b_to_a_4(t_stack *stack_a, t_stack *stack_b, t_stack *op, int len)
+int	b_to_a_4(t_args *args, int len)
 {
 	if (len == 3)
 	{
-		sort_3_b_1(stack_a, stack_b, op);
-		pa(stack_a, stack_b, op);
-		pa(stack_a, stack_b, op);
-		pa(stack_a, stack_b, op);
+		sort_3_b_1(args);
+		pa(args);
+		pa(args);
+		pa(args);
 		return (1);
 	}
 	else if (len == 2)
 	{
-		sort_3_b_1(stack_a, stack_b, op);
-		pa(stack_a, stack_b, op);
-		pa(stack_a, stack_b, op);
+		sort_3_b_1(args);
+		pa(args);
+		pa(args);
 		return (1);
 	}
 	else if (len == 1)
 	{
-		pa(stack_a, stack_b, op);
+		pa(args);
 		return (1);
 	}
 	else if (len < 1)
 		return (1);
 	return (0);
-}
-
-void	t_stack_init_b(t_stack *stack_a, t_stack *stack_b,
-		t_stack_set *set, int len)
-{
-	set->stack_a = stack_a;
-	set->stack_b = stack_b;
-	set->len = len;
-	select_pivot(stack_b, &(set->pivot1), &(set->pivot2), len);
 }

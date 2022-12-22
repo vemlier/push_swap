@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   preprocessor_h.c                                   :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/04 13:10:26 by chukim            #+#    #+#             */
-/*   Updated: 2022/05/04 13:10:26 by chukim           ###   ########.fr       */
+/*   Created: 2022/12/23 04:40:28 by chukim            #+#    #+#             */
+/*   Updated: 2022/12/23 04:40:28 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_main(long long *result, int *flag, int *sign, t_stack *stack)
 		*sign = 1;
 	}
 	else
-		print_error();
+		print_error("arguments error\n");
 }
 
 void	print_other(long long result, int flag, int sign, t_stack *stack)
@@ -34,10 +34,10 @@ void	print_other(long long result, int flag, int sign, t_stack *stack)
 		&& (result <= INT_MAX && result >= INT_MIN))
 		push_bottom(stack, get_new_node((int)result));
 	else if (flag != 0)
-		print_error();
+		print_error("arguments error\n");
 }
 
-void	preprocessor(char *str, int i, int flag, t_stack *stack)
+void	parser(char *str, int i, int flag, t_stack *stack)
 {
 	int			sign;
 	long long	result;
@@ -54,7 +54,7 @@ void	preprocessor(char *str, int i, int flag, t_stack *stack)
 			flag = 1;
 		}
 		else if (str[i] != ' ')
-			print_error();
+			print_error("arguments error\n");
 		else if (flag == 1)
 			print_main(&result, &flag, &sign, stack);
 	}

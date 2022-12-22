@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_num_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 12:26:52 by chukim            #+#    #+#             */
-/*   Updated: 2022/10/29 17:23:07 by chukim           ###   ########.fr       */
+/*   Updated: 2022/12/02 02:55:48 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	num_itoa(t_info *info, char *num_box, unsigned long long num)
 		{
 			num_box[len++] = (DIGITS[num % info->num_base]) | info->locass;
 			num = num / info->num_base;
-			if (num < 0 && info->address == ENABLE)
-				num *= -1;
 		}
 	}
 	return (len);

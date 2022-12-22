@@ -12,8 +12,8 @@
 
 #include "../includes/push_swap.h"
 
-void	print_error(void)
+void	print_error(char *msg)
 {
-	ft_printf("Error\n");
+	write(2, msg, ft_strlen(msg));
 	exit(0);
 }

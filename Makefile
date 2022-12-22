@@ -3,45 +3,46 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chukim <chukim@student.42.fr>              +#+  +:+       +#+         #
+#    By: chukim <chukim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 12:46:09 by chukim            #+#    #+#              #
-#    Updated: 2022/10/29 18:03:15 by chukim           ###   ########.fr        #
+#    Updated: 2022/12/23 04:38:57 by chukim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= push_swap.a
-FT_PRINTFDIR	= ./ft_printf
-FT_PRINTFFILE	= libftprintf.a
-CC				= cc
-CFLAGS			= -Wall -Wextra -Werror
-RM				= rm -f
-AR				= ar rcs
-INCLUDES		= ./includes/push_swap.h
-SRCS    = ./srcs/push_swap.c ./srcs/preprocessor.c ./srcs/stack_making.c ./srcs/stack_printing.c \
+NAME		= push_swap
+LIBNAME		= push_swap.a
+PRINTFDIR	= ./ft_printf
+PRINTFFILE	= libftprintf.a
+CFLAGS		= -Wall -Wextra -Werror
+ARFLAGS		= rcs
+INCLUDES	= ./includes/push_swap.h
+SRCS		= ./srcs/main.c ./srcs/parser.c ./srcs/stack_making.c ./srcs/stack_printing.c \
 			./srcs/stack_basic.c ./srcs/stack_push_swap1.c ./srcs/stack_push_swap2.c ./srcs/stack_arr.c \
 			./srcs/error.c ./srcs/sorting_a.c ./srcs/sorting_b.c ./srcs/quick_sorting.c \
 			./srcs/main_sorting1.c ./srcs/main_sorting2.c ./srcs/sorting_5.c ./srcs/opt_op.c
-OBJS    = $(SRCS:.c=.o)
+OBJS		= $(SRCS:.c=.o)
 
-%.o : %.c
+all: $(NAME)
+
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME) : $(OBJS)
-		make -C $(FT_PRINTFDIR)
-		cp $(FT_PRINTFDIR)/$(FT_PRINTFFILE) $(NAME)
-		$(AR) $@ $?
+$(NAME): $(OBJS)
+		make -C $(PRINTFDIR)
+		cp $(PRINTFDIR)/$(PRINTFFILE) $(LIBNAME)
+		ar $(ARFLAGS) $(LIBNAME) $?
+		$(CC) $(CFLAGS) -o $@ $(LIBNAME)
 
-all : $(NAME)
-
-clean :
-	$(RM) $(OBJS)
-	make -C $(FT_PRINTFDIR) clean
+clean:
+	rm -f $(OBJS)
+	make -C $(PRINTFDIR) clean
 		
 
-fclean : clean
-	$(RM) $(NAME)
-	make fclean -C $(FT_PRINTFDIR)
+fclean: clean
+	rm -f $(NAME)
+	rm -f $(LIBNAME)
+	make fclean -C $(PRINTFDIR)
 
 re : clean all
 

@@ -3,98 +3,82 @@
 /*                                                        :::      ::::::::   */
 /*   sorting_5.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 11:20:54 by chukim            #+#    #+#             */
-/*   Updated: 2022/10/29 17:49:15 by chukim           ###   ########.fr       */
+/*   Updated: 2022/12/23 04:14:25 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	sorting_5(t_stack *stack_a, t_stack *stack_b, t_stack *op)
+void	sorting_5(t_args *args)
 {
 	int		len;
 	int		*arr;
 	t_node	*current;
 
-	if (stack_a->len == 3)
+	if (args->stack_a->len == 3)
 	{
-		sorting_3(stack_a, op);
+		sorting_3(args);
 		return ;
 	}
-	len = stack_a->len;
-	arr = stack_to_arr(stack_a, len);
+	len = args->stack_a->len;
+	arr = stack_to_arr(args->stack_a, len);
 	quick_sort(arr, 0, len - 1);
-	current = stack_a->top;
+	current = args->stack_a->top;
 	while (len-- > 0)
 	{
 		if (current->val == arr[0] || current->val == arr[4])
-			pb(stack_a, stack_b, op);
+			pb(args);
 		else
-			ra(stack_a, op);
-		current = stack_a->top;
+			ra(args);
+		current = args->stack_a->top;
 	}
-	sorting_5_2(stack_a, stack_b, op);
+	free(arr);
+	sorting_5_2(args);
 }
 
-void	sorting_5_2(t_stack *stack_a, t_stack *stack_b, t_stack *op)
+void	sorting_5_2(t_args *args)
 {
-	sorting_3(stack_a, op);
-	pa(stack_a, stack_b, op);
-	if (stack_a->top->val > stack_b->top->val)
+	sorting_3(args);
+	pa(args);
+	if (args->stack_a->top->val > args->stack_b->top->val)
 	{
-		ra(stack_a, op);
-		pa(stack_a, stack_b, op);
+		ra(args);
+		pa(args);
 	}
 	else
 	{
-		pa(stack_a, stack_b, op);
-		ra(stack_a, op);
+		pa(args);
+		ra(args);
 	}
 }
 
-void	sorting_3(t_stack *stack_a, t_stack *op)
+void	sorting_3(t_args *args)
 {
 	t_node	*current;
 
-	current = stack_a->top;
+	current = args->stack_a->top;
 	if (current->val > current->left->val
-		&& current->val < stack_a->bottom->val)
-		sa(stack_a, op);
+		&& current->val < args->stack_a->bottom->val)
+		sa(args);
 	else if (current->left->val < current->val
-		&& current->left->val > stack_a->bottom->val)
+		&& current->left->val > args->stack_a->bottom->val)
 	{
-		sa(stack_a, op);
-		rra(stack_a, op);
+		sa(args);
+		rra(args);
 	}
-	else if (stack_a->bottom->val < current->val
-		&& stack_a->bottom->val > current->left->val)
-		ra(stack_a, op);
-	else if (stack_a->bottom->val > current->val
-		&& stack_a->bottom->val < current->left->val)
+	else if (args->stack_a->bottom->val < current->val
+		&& args->stack_a->bottom->val > current->left->val)
+		ra(args);
+	else if (args->stack_a->bottom->val > current->val
+		&& args->stack_a->bottom->val < current->left->val)
 	{
-		sa(stack_a, op);
-		ra(stack_a, op);
+		sa(args);
+		ra(args);
 	}
 	else if (current->val < current->left->val
-		&& current->val > stack_a->bottom->val)
-		rra(stack_a, op);
-}
-
-void	basic_test(t_stack *stack_a)
-{
-	int		len;
-	t_node	*current;
-
-	len = stack_a->len;
-	len--;
-	current = stack_a->top;
-	while (len-- > 0)
-	{
-		if (current->val > current->left->val)
-			return ;
-		current = current->left;
-	}
-	exit(0);
+		&& current->val > args->stack_a->bottom->val)
+		rra(args);
 }

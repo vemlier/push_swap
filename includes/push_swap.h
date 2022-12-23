@@ -6,7 +6,7 @@
 /*   By: chukim <chukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 13:48:15 by chukim            #+#    #+#             */
-/*   Updated: 2022/12/23 15:17:16 by chukim           ###   ########.fr       */
+/*   Updated: 2022/12/23 15:20:44 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ typedef struct s_args
 	struct s_stack		*stack_b;
 	struct s_stack		*op;
 	struct s_pivot_set	*pivot_set;
-	int					pivot1;
-	int					pivot2;
 	int					len;
 }	t_args;
 

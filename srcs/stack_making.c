@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   stack_making.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:51:46 by chukim            #+#    #+#             */
-/*   Updated: 2022/10/29 17:49:02 by chukim           ###   ########.fr       */
+/*   Updated: 2022/12/23 14:57:40 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "../includes/push_swap.h"
 
 t_node	*get_new_node(int num)

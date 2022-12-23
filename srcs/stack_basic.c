@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   stack_basic.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:39:02 by chukim            #+#    #+#             */
-/*   Updated: 2022/10/29 17:49:04 by chukim           ###   ########.fr       */
+/*   Updated: 2022/12/23 15:13:36 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "../includes/push_swap.h"
 
 int	is_exist(int num, t_stack *stack)

@@ -6,11 +6,13 @@
 /*   By: chukim <chukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:28:26 by chukim            #+#    #+#             */
-/*   Updated: 2022/12/23 04:14:43 by chukim           ###   ########.fr       */
+/*   Updated: 2022/12/23 15:15:43 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "../includes/push_swap.h"
+#include "../ft_printf/includes/ft_printf.h"
 
 void	select_pivot(t_stack *stack, t_pivot_set *pivot, int len)
 {

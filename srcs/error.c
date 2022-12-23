@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "../includes/push_swap.h"
+#include "../ft_printf/libft/includes/libft.h"
 
 void	print_error(char *msg)
 {

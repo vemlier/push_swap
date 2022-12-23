@@ -6,10 +6,11 @@
 /*   By: chukim <chukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 11:20:54 by chukim            #+#    #+#             */
-/*   Updated: 2022/12/23 04:14:25 by chukim           ###   ########.fr       */
+/*   Updated: 2022/12/23 15:16:35 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "../includes/push_swap.h"
 
 void	sorting_5(t_args *args)

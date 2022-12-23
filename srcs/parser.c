@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
 #include "../includes/push_swap.h"
+#include "../ft_printf/libft/includes/libft.h"
 
 void	print_main(long long *result, int *flag, int *sign, t_stack *stack)
 {

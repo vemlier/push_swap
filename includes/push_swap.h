@@ -6,16 +6,12 @@
 /*   By: chukim <chukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 13:48:15 by chukim            #+#    #+#             */
-/*   Updated: 2022/12/23 04:37:36 by chukim           ###   ########.fr       */
+/*   Updated: 2022/12/23 15:17:16 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-
-# include "../ft_printf/includes/ft_printf.h"
-# include <limits.h>
-# include <stdio.h>
 
 typedef struct s_node
 {

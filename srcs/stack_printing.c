@@ -6,11 +6,13 @@
 /*   By: chukim <chukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 10:09:44 by chukim            #+#    #+#             */
-/*   Updated: 2022/12/23 04:36:40 by chukim           ###   ########.fr       */
+/*   Updated: 2022/12/23 15:13:16 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "../includes/push_swap.h"
+#include "../ft_printf/includes/ft_printf.h"
 
 void	print_stack(t_stack *stack)
 {
@@ -23,14 +25,14 @@ void	print_stack(t_stack *stack)
 	}
 	else
 	{
-		printf("-----stack-----\n");
+		ft_printf("-----stack-----\n");
 		while (current != NULL)
 		{
 			ft_printf("%d\n", current->val);
 			current = current->left;
 		}
-		printf("-----stack-----\n");
-		printf("stack len is [%d]\n", stack->len);
+		ft_printf("-----stack-----\n");
+		ft_printf("stack len is [%d]\n", stack->len);
 	}
 }
 

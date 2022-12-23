@@ -6,10 +6,11 @@
 /*   By: chukim <chukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 10:23:09 by chukim            #+#    #+#             */
-/*   Updated: 2022/12/22 07:11:40 by chukim           ###   ########.fr       */
+/*   Updated: 2022/12/23 15:14:03 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "../includes/push_swap.h"
 
 int	*stack_to_arr(t_stack *stack, int len)

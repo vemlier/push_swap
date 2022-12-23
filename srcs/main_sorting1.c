@@ -6,10 +6,11 @@
 /*   By: chukim <chukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 11:02:21 by chukim            #+#    #+#             */
-/*   Updated: 2022/12/23 04:17:56 by chukim           ###   ########.fr       */
+/*   Updated: 2022/12/23 15:16:01 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "../includes/push_swap.h"
 
 void	a_to_b(t_args *args, int len)
